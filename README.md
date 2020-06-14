@@ -1,10 +1,15 @@
 # SimulacionBarajasEstocasticas
 Hola!
 
-En este tutorial te comparto como resolví el reto de nuestro profesor David Aroesti de Platzi en su [Clase simulación Barajas](https://platzi.com/clases/1835-programacion-estocastica/26443-simulacion-de-barajas/) en el modulo de simulaciones de Montecarlo, del curso Programación Dinámica y Estocástica con Python
+Si eres parte de la comunidad platzi, puedes ver el tutorial acá:
+[Tutorial Simualción barajas](https://platzi.com/tutoriales/1835-programacion-estocastica/6017-simulacion-de-barajas-sin-ordenar/)
+
+En este tutorial te comparto como resolví el reto de nuestro profesor David Aroesti en su [Clase simulación Barajas](https://platzi.com/clases/1835-programacion-estocastica/26443-simulacion-de-barajas/) en el modulo de simulaciones de Montecarlo, del curso Programación Dinámica y Estocástica con Python.
 
 **Recuerda que el reto es:**
 - Encontrar la probabilidad de encontrar una corrida (o escalera) de 5 barajas (cartas).
+
+Acá puedes descargar mi solución desde github: [Enlace al código solución](https://github.com/datacloudgui/SimulacionBarajasEstocasticas)
 
 En el link de la clase puedes encontrar el código completo, en este tutorial explicare las modificaciones.
 
@@ -34,7 +39,7 @@ El código escrito reutiliza el **ciclo for** que recorre el numero de manos, do
         for carta in mano:
             valores.append(carta[1])
 ```
-Ahora sí, lo primero que haremos es buscar el indice (la posición en la lista) en **VALORES** que corresponde con la primer carta de nuestra mano **valores[0]**:
+Ahora sí, lo primero que haremos es buscar el índice (la posición en la lista) en **VALORES** que corresponde con la primer carta de nuestra mano **valores[0]**:
 
 ```
 primer_index= VALORES.index(valores[0])
@@ -48,7 +53,7 @@ primer_index = 2, que es la posición del 3 en el vector **VALORES**
 Haremos el ejercicio con el ejemplo que di anteriormente para que lo veamos mejor:
 **Ej:** 3, 6, 4, 2 y 5
 
-El **for** recorre desde la segunda carta hasta el final (en este caso 4 veces, debido al numero de cartas por cada mano), recuerda que nuestra primera carta es 3, cuya posición la tenemos en **primer_index**:
+El **for** recorre desde la segunda carta hasta el de la mano (en este caso 4 veces, debido al numero de cartas por cada mano), recuerda que nuestra primera carta es 3, cuya posición la tenemos en **primer_index**:
 
 1. Buscaré si esta la carta 2 ó la carta 4.
 como están las dos cartas, entonces ascendente=1, descendente =1
@@ -64,7 +69,7 @@ como no está ninguna, entonces: ascendente=3, descendente=1
 
 Finalmente, recuerda que la primera carta por definición esta ordenada (es solo una), entonces validamos la escalera cuando:
 `ascendente+descendente+1 == tamano_mano`
-Para el ejemplo anterior: **3+1+1==5** es verdadero! entonces tenemos una escalera.
+Para el ejemplo anterior: **3+1+1==5** es verdadero!, entonces tenemos una escalera.
 
 Ahora si miremos el código, luego del código te explicare dos casos que se deben tener en cuenta para poder aplicar el algoritmo previamente explicado:
 - El caso que me permita recorrer la lista de forma continua (pasar del rey al As o viceversa).
@@ -103,7 +108,7 @@ Vamos a explorar los dos casos:
 
 1.  Recorrer la lista de forma continua (pasar del rey al As o viceversa).
 
-Recuerda que tenemos la lista **VALORES** la cual esta ordenada y tenemos el indice de la primera carta en **primer_index**, entonces se puede recorrer el arreglo **VALORES** aumentando y disminuyendo el indice (denominados **siguiente y anterior**) en cada ciclo for que recorre las 4 cartas. Pero:
+Recuerda que tenemos la lista **VALORES** la cual esta ordenada y tenemos el índice de la primera carta en **primer_index**, entonces se puede recorrer el arreglo **VALORES** aumentando y disminuyendo el índice (denominados **siguiente y anterior**) en cada ciclo for que recorre las 4 cartas. Pero:
 El problema es que si queremos pasar del rey al As el aumento en algunos casos nos puede generar indices mayores a 12 y menores a 0, para esto coloque un if, sin embargo, por compresión en el código use los [Condicionales ternarios](https://www.pythoncentral.io/one-line-if-statement-in-python-ternary-conditional-operator/), puedes revisar en detalle en el link, estos consisten en un if-else en una sola linea.
 
 ```
@@ -115,13 +120,13 @@ En nuestro caso una de las condiciones es:
 siguiente=(primer_index+i if (primer_index+i)<13 else primer_index+i-12)
 ```
 De esta forma aseguramos que el valor no sea mayor a 12.
-Recuerda que **i** es el indice del for, por lo cual **i** tomara valores desde 1 hasta 4.
+Recuerda que **i** es la variable del for, por lo cual **i** tomara valores desde 1 hasta 4.
 
-Te dejo la sentencia del indice anterior para que lo revises, recuerda que siempre puedes apoyarte del **print**
+Te dejo la sentencia del índice anterior para que lo revises, recuerda que siempre puedes apoyarte del **print**
 
 2. Validar si la carta ascendente o descendente **esta** en la mano
 
-Ahora que ya podemos recorrer el arreglo **VALORES** sin que se rompa nuestro programa, vamos a verificar si las cartas anteriores o siguientes están en la mano (las 5 cartas que tenemos), para esto usé la función **count** que tienen las listas, la cual nos devuelve el numero de veces que esta un elemento en una lista. Para esto:
+Ahora que ya podemos recorrer el arreglo **VALORES** sin que se rompa nuestro programa, vamos a verificar si las cartas anteriores o siguientes están en la mano (las 5 cartas que tenemos), para esto use la función **count** que tienen las listas, la cual nos devuelve el numero de veces que esta un elemento en una lista. Para esto:
 Buscaremos el número de veces que esta la carta siguiente ó anterior **(VALORES[siguiente])** dentro de la lista que tiene nuestra mano **(valores)**.
 Teniendo en cuenta que solo queremos que este **una sola vez**, lo cual se realiza de la siguiente forma:
 
@@ -135,7 +140,18 @@ if (valores.count(VALORES[siguiente]))==1:
 ```
 Por último hacemos la validación final de **ascendente+descendente+1=tamano_mano** para contar si esa mano es una escalera o no y calculamos su probabilidad tal como lo hace el profe David en su código.
 
-Espero te haya sido de utilidad este tutorial, déjame en los comentarios que te pareció o si quieres que detalle alguno de los otros ejercicios de la clase o de la escuela de Data Science
+```
+probabilidad_escalera = escalera / intentos
+    print(f'La probabilidad de obtener una escalera en una mano de {tamano_mano} cartas es {probabilidad_escalera}')
+```
+
+**Resultados:**
+
+- En 1000 intentos 0.018
+- En 10000 intentos 0.0179
+- En 100000 intentos 0.01643
+
+Espero te haya sido de utilidad este tutorial, déjame en los comentarios que probabilidad te resulta a ti, que te pareció o si quieres que detalle alguno de los otros ejercicios de la clase o de la escuela de Data Science.
 
 y recuerda
 **Nunca pares de aprender**
