@@ -2,7 +2,7 @@
 Hola!
 
 Si eres parte de la comunidad platzi, puedes ver el tutorial acá:
-[Tutorial Simualción barajas](https://platzi.com/tutoriales/1835-programacion-estocastica/6017-simulacion-de-barajas-sin-ordenar/)
+[Tutorial Simulación barajas](https://platzi.com/tutoriales/1835-programacion-estocastica/6017-simulacion-de-barajas-sin-ordenar/)
 
 En este tutorial te comparto como resolví el reto de nuestro profesor David Aroesti en su [Clase simulación Barajas](https://platzi.com/clases/1835-programacion-estocastica/26443-simulacion-de-barajas/) en el modulo de simulaciones de Montecarlo, del curso Programación Dinámica y Estocástica con Python.
 
